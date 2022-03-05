@@ -78,9 +78,13 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
+        Set<Authority> set = new HashSet<Authority>();
 
+        this.userRoles.forEach(userRole -> {
+           set.add(new Authority(userRole.getRole().getRoleName()));
+        });
 
-        return null;
+        return set;
     }
 
     public String getPassword() {
